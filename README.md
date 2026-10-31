@@ -55,7 +55,7 @@ Le VPC et les subnets ne sont pas créés ici : ils sont passés en entrée (ils
 
 ```hcl
 module "web" {
-  source = "git::https://github.com/Bristhis25/terraform-aws-web.git?ref=v1.0.0"
+  source = "git::https://github.com/Pengchao020401/terraform-aws-web.git?ref=v1.0.1"
 
   name                  = "novasphere-dev-abc"
   vpc_id                = module.vpc.vpc_id

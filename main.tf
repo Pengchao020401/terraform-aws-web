@@ -46,7 +46,7 @@ resource "aws_vpc_security_group_egress_rule" "alb_to_web" {
 # --- Security Group des instances : port 80 UNIQUEMENT depuis le SG de l'ALB ---------------------
 resource "aws_security_group" "web" {
   name_prefix = "${var.name}-web-"
-  description = "Instances web ${var.name} : HTTP depuis l'ALB seulement, pas de SSH"
+  description = "Instances web ${var.name} : HTTP depuis ALB seulement, pas de SSH"
   vpc_id      = var.vpc_id
 
   tags = merge(local.tags, { Name = "${var.name}-web" })
@@ -59,7 +59,7 @@ resource "aws_security_group" "web" {
 resource "aws_vpc_security_group_ingress_rule" "web_from_alb" {
   #checkov:skip=CKV_AWS_260:Faux positif : la regle n'a aucun CIDR, la source est le Security Group de l'ALB (referenced_security_group_id)
   security_group_id            = aws_security_group.web.id
-  description                  = "HTTP depuis l'ALB (reference au SG, pas de CIDR)"
+  description                  = "HTTP depuis ALB (reference au SG, pas de CIDR)"
   ip_protocol                  = "tcp"
   from_port                    = 80
   to_port                      = 80
